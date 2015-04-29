@@ -8,35 +8,37 @@ class indexController extends mainController {
 		$this->messages_currencies = array();
 		//Lets have an array of compared currencies, and make a line out of each of them
 		$currencies = array(
-			'usd' => 'gbp',
-			'usd' => 'eur',
-			'cad' => 'aud',
+			'USD' => 'GBP',
+			'USD' => 'EUR',
+			'CAD' => 'AUD',
 		);
-		//Yes I know of the [] shorthand instead of array(), but it's only 5.4+ and I'd rather have a longer version that's more compatible for now
-		$messages_usd_gbp = $db->messages->find( array(
-			'$or' => array(
-				array( '$and' => array(
-					array( 'currencyFrom' => 'USD' ),
-					array( 'currencyTo'   => 'GBP' ),
-				) ),
-				array( '$and' => array(
-					array( 'currencyFrom' => 'GBP' ),
-					array( 'currencyTo'   => 'USD' ),
-				) )
-			)
-		) )->sort(array('timePlaced' => 1));
-		$this->messages_usd_gbp = array(
-			'name' => 'USD / GBP',
-			'data' => array()
-		);
-		foreach ($messages_usd_gbp as $message) {
-			if (!empty($message['timePlaced']) && !empty($message['rate']) && !empty($message['currencyFrom'])) {
-				if ( $message['currencyFrom'] == 'GBP' ) {
-					$message['rate'] = 1 / $message['rate']; //to keep rate from USD to GBP (e.g. 1 USD = 0.5 GBP, but 1 GBP = 2, so we do 1 / 2  to get the relevant rate)
+		foreach ($currencies as $curr1 => $curr2) {
+			//Yes I know of the [] shorthand instead of array(), but it's only 5.4+ and I'd rather have a longer version that's more compatible for now
+			$currency_data = $db->messages->find( array(
+				'$or' => array(
+					array( '$and' => array(
+						array( 'currencyFrom' => $curr1 ),
+						array( 'currencyTo'   => $curr2 ),
+					) ),
+					array( '$and' => array(
+						array( 'currencyFrom' => $curr2 ),
+						array( 'currencyTo'   => $curr1 ),
+					) )
+				)
+			) )->sort(array('timePlaced' => 1));
+			$message_currency = array(
+				'name' => $curr1 . ' / ' . $curr2,
+				'data' => array()
+			);
+			foreach ($currency_data as $message) {
+				if (!empty($message['timePlaced']) && !empty($message['rate']) && !empty($message['currencyFrom'])) {
+					if ( $message['currencyFrom'] == $curr2 ) {
+						$message['rate'] = round(1 / $message['rate'], 2); //to keep rate from Currency1 to Currency2 (e.g. 1 USD = 0.5 GBP, but 1 GBP = 2, so we do 1 / 2  to get the relevant rate)
+					}
+					$message_currency['data'][] = array( strtotime( $message['timePlaced'] ), $message['rate'] );
 				}
-				$this->messages_usd_gbp['data'][] = array( strtotime( $message['timePlaced'] ), $message['rate'] );
 			}
+			$this->messages_currencies[] = $message_currency;
 		}
-		$this->messages_currencies[] = $this->messages_usd_gbp;
 	}
 }
