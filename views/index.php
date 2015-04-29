@@ -57,8 +57,10 @@
 		</div>
 		<h2>Messages Graphs</h2>
 		<div id="graph1"></div>
+		<div id="graph2"></div>
 		<script type="text/javascript">
-			var series = <?php echo json_encode( $this->messages_currencies ) ?>;
+			var series1 = [<?php echo json_encode( $this->messages_currencies[0] ) ?>] //has to be wrapped with [] since it's not a JSON array after encoding;
+			var series2 = <?php echo json_encode( $this->messages_currencies ) ?>;
 		</script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

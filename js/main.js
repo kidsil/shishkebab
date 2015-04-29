@@ -12,6 +12,20 @@ $(document).ready(function() {
 				month: '%d/%m/%Y'
 			}
 		},
-		series: series
+		series: series1
+	});
+
+	jQuery('#graph2').highcharts({
+		title: {
+			text: 'Rate of Multiple Currencies'
+		},
+		xAxis: {
+			type: 'datetime',
+			dateTimeLabelFormats: {
+				month: '%d/%m/%Y'
+			}
+		},
+		series: series2
 	})
+
 });
