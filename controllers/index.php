@@ -35,7 +35,7 @@ class indexController extends mainController {
 					if ( $message['currencyFrom'] == $curr2 ) {
 						$message['rate'] = round(1 / $message['rate'], 2); //to keep rate from Currency1 to Currency2 (e.g. 1 USD = 0.5 GBP, but 1 GBP = 2, so we do 1 / 2  to get the relevant rate)
 					}
-					$message_currency['data'][] = array( strtotime( $message['timePlaced'] ), $message['rate'] );
+					$message_currency['data'][] = array( strtotime( $message['timePlaced'] ) * 1000, $message['rate'] ); //why * 1000 ? because JS counts Unix Timestamps in milliseconds, awesome I know
 				}
 			}
 			$this->messages_currencies[] = $message_currency;
