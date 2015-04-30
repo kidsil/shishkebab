@@ -8,7 +8,7 @@ class indexController extends mainController {
 		$this->messages_currencies = array();
 		//Lets have an array of compared currencies, and make a line out of each of them
 		$currencies = array(
-			'USD' => 'GBP',
+			'EUR' => 'GBP',
 			'USD' => 'EUR',
 			'CAD' => 'AUD',
 		);

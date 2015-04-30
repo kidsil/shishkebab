@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('table#messages').show();
 	jQuery('#graph1').highcharts({
 		title: {
-			text: 'Rate of USD/GBP'
+			text: 'Rate of EUR/GBP'
 		},
 		xAxis: {
 			type: 'datetime',
