@@ -4,7 +4,6 @@ Requirements
 * MongoDB - I chose MongoDB because it tends to be faster on high insertion rates, also the data format seems to be 
 Make sure to install PHP's Mongo drive too via `sudo pecl install mongo` + add `extension=mongo.so` to php.ini (Vagrant would be helpful here, but would take waay too much time to configure).
 Check out the config.php for db related configuration.
-* 
 
 Structure
 --------
