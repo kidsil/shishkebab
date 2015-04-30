@@ -11,6 +11,7 @@ Structure
 * db/ - db related things (duh)
 	* config.php - host/user/pass.. db configuration info
 	* db.php - building the $db global itself
+	* db_export.json - mongo export from an existing DB (if needed by testers)
 * README.md - this file
 * init_db.php (optional) - add some dummy data, should be called directly (localhost.../init.php)
 * message.php - this is the endpoint for inserting data to the DB
