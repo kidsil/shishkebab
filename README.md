@@ -8,6 +8,7 @@ Check out the config.php for db related configuration.
 
 Structure
 --------
+* css/ js/ - static files (someday they'll all go to a CDN)
 * db/ - db related things (duh)
 	* config.php - host/user/pass.. db configuration info
 	* db.php - building the $db global itself
@@ -15,6 +16,8 @@ Structure
 * init_db.php (optional) - add some dummy data, should be called directly (localhost.../init.php)
 * message.php - this is the endpoint for inserting data to the DB
 make sure the JSON data is sent inside the `data` variable, I'm assuming the JSON data is valid for performance's sake *(since it's being sent from CurrencyFair, I know it's a trusted source ;) )*
+* controllers/ views/ - super simple (and not really with a routing option as of yet) implementation of the VC part of an MVC.
+* index.php - Message Frontend - sortable paginated table + highcharts graphs (some info about stuff...)
 
 
 
